@@ -1,69 +1,53 @@
-import Footer from "@/app/_components/footer";
-import { CMS_NAME, HOME_OG_IMAGE_URL } from "@/lib/constants";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import cn from "classnames";
-import { ThemeSwitcher } from "./_components/theme-switcher";
+import { Inter, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
 
 import "./globals.css";
+import { Header } from "@/components/header";
+import { Provider } from "@/components/ui/provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+const notoSansJP = Noto_Sans_JP({
+	variable: "--font-noto-sans-jp",
+	subsets: ["latin"],
+});
+const jetBrainsMono = JetBrains_Mono({
+	variable: "--font-jetbrains-mono",
+	subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: `Next.js Blog Example with ${CMS_NAME}`,
-  description: `A statically generated blog example using Next.js and ${CMS_NAME}.`,
-  openGraph: {
-    images: [HOME_OG_IMAGE_URL],
-  },
+	title: "KiRura Blog",
+	description: "しがない個人ブログ",
+	icons: "https://blog.kirura.f5.si/favicon/favicon.ico",
+	openGraph: {
+		images: "https://blog.kirura.f5.si/favicon/kirura.jpg",
+	},
+	twitter: {
+		card: "summary",
+	},
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <head>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
-        <link
-          rel="mask-icon"
-          href="/favicon/safari-pinned-tab.svg"
-          color="#000000"
-        />
-        <link rel="shortcut icon" href="/favicon/favicon.ico" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <meta
-          name="msapplication-config"
-          content="/favicon/browserconfig.xml"
-        />
-        <meta name="theme-color" content="#000" />
-        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      </head>
-      <body
-        className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
-      >
-        <ThemeSwitcher />
-        <div className="min-h-screen">{children}</div>
-        <Footer />
-      </body>
-    </html>
-  );
+	return (
+		<html
+			lang="ja"
+			suppressHydrationWarning
+			className={`${inter.variable} ${notoSansJP.variable} ${jetBrainsMono.variable}`}
+		>
+			<head>
+				<link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+				<meta name="darkreader-lock" />
+			</head>
+			<body>
+				<Provider>
+					<Header />
+					{children}
+				</Provider>
+			</body>
+		</html>
+	);
 }
