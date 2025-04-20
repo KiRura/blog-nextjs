@@ -57,7 +57,7 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 		title: post.title,
 		description: post.excerpt,
 		openGraph: {
-			images: [`https://blog.kirura.f5.si/${post.ogImage.url}`],
+			images: [`https://blog.kirura.f5.si${post.ogImage.url}`],
 		},
 		twitter: {
 			card: "summary_large_image",
