@@ -1,4 +1,5 @@
 import { PostHeader } from "@/components/post-header";
+import { PostHeading } from "@/components/post-headings";
 import { Prose } from "@/components/ui/prose-custom";
 import { config } from "@/config";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
@@ -18,17 +19,21 @@ export default async function Post(props: Params) {
 
 	return (
 		<Container my={4} maxW="8xl" as="main" {...config.transitionAnimation}>
-			<Flex direction="column" maxW="4xl" gap={4} mx="auto">
-				<PostHeader
-					title={post.title}
-					coverImage={post.coverImage}
-					date={post.date}
-					author={post.author}
-				/>
-				<Separator />
-				<Prose size="lg" maxW="4xl">
-					<Markdown remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
-				</Prose>
+			<Flex w="full" justify="space-evenly">
+				<PostHeading hide={false}>{post.content}</PostHeading>
+				<Flex direction="column" maxW="3xl" gap={4}>
+					<PostHeader
+						title={post.title}
+						coverImage={post.coverImage}
+						date={post.date}
+						author={post.author}
+					/>
+					<Separator />
+					<Prose size="lg">
+						<Markdown remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
+					</Prose>
+				</Flex>
+				<PostHeading hide>{post.content}</PostHeading>
 			</Flex>
 		</Container>
 	);
@@ -50,9 +55,12 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 
 	return {
 		title: post.title,
+		description: post.excerpt,
 		openGraph: {
-			title: post.title,
-			images: [post.ogImage.url],
+			images: [`https://blog.kirura.f5.si/${post.ogImage.url}`],
+		},
+		twitter: {
+			card: "summary_large_image",
 		},
 	};
 }
