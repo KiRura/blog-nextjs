@@ -1,5 +1,6 @@
-import { Box, Button, Container, Flex } from "@chakra-ui/react";
-import { ColorModeButton } from "./ui/color-mode";
+import { Avatar, Box, Container, Flex, HStack, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { ColorModeButton } from "./ui/color-mode-custom";
 
 export function Header() {
 	return (
@@ -13,7 +14,14 @@ export function Header() {
 		>
 			<Container maxW="8xl">
 				<Flex align="center" justify="space-between" py={2}>
-					<Button variant="ghost">KiRura Blog</Button>
+					<Link asChild fontWeight="bold">
+						<HStack>
+							<Avatar.Root size="xs">
+								<Avatar.Image src="/assets/blog/authors/kirura.jpg" />
+							</Avatar.Root>
+							<NextLink href="/">KiRura Blog</NextLink>
+						</HStack>
+					</Link>
 					<ColorModeButton />
 				</Flex>
 			</Container>
