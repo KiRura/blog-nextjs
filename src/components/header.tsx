@@ -1,5 +1,14 @@
-import { Avatar, Box, Container, Flex, HStack, Link } from "@chakra-ui/react";
+import {
+	Avatar,
+	Box,
+	Container,
+	Flex,
+	HStack,
+	IconButton,
+	Link,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
+import { FaGithub } from "react-icons/fa6";
 import { ColorModeButton } from "./ui/color-mode-custom";
 
 export function Header() {
@@ -22,7 +31,17 @@ export function Header() {
 							<NextLink href="/">KiRura Blog</NextLink>
 						</HStack>
 					</Link>
-					<ColorModeButton />
+					<HStack>
+						<IconButton asChild aria-label="Source" variant="ghost">
+							<NextLink
+								href="https://github.com/KiRura/blog-nextjs"
+								target="_blank"
+							>
+								<FaGithub />
+							</NextLink>
+						</IconButton>
+						<ColorModeButton />
+					</HStack>
 				</Flex>
 			</Container>
 		</Box>
