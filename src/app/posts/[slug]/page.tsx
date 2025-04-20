@@ -27,6 +27,7 @@ export default async function Post(props: Params) {
 						coverImage={post.coverImage}
 						date={post.date}
 						author={post.author}
+						excerpt={post.excerpt}
 					/>
 					<Separator />
 					<Prose size="lg">

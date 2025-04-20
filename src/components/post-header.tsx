@@ -1,13 +1,13 @@
 import type { Author } from "@/interfaces/author";
 import {
-	Avatar,
+	ClientOnly,
 	Flex,
-	HStack,
 	Heading,
 	Image,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
+import NextImage from "next/image";
 import { DateFormatter } from "./date-formatter";
 
 export function PostHeader({
@@ -15,7 +15,14 @@ export function PostHeader({
 	coverImage,
 	date,
 	author,
-}: { title: string; coverImage: string; date: string; author: Author }) {
+	excerpt,
+}: {
+	title: string;
+	coverImage: string;
+	date: string;
+	author: Author;
+	excerpt: string;
+}) {
 	return (
 		<VStack gap={4} direction="column" maxW="4xl">
 			<Image src={coverImage} rounded="lg" />
@@ -24,16 +31,27 @@ export function PostHeader({
 					{title}
 				</Heading>
 				<Flex align="end" w="full" justify="space-between">
-					<HStack>
-						<Avatar.Root>
-							<Avatar.Fallback name={author.name} />
-							<Avatar.Image src={author.picture} />
-						</Avatar.Root>
-						<Text>{author.name}</Text>
-					</HStack>
-					<Text fontFamily="mono">
-						<DateFormatter dateString={date} />
-					</Text>
+					<Flex gap={3}>
+						<Image rounded="full" boxSize={12} asChild>
+							<NextImage
+								src={author.picture}
+								alt={`${author.name} icon`}
+								width={256}
+								height={256}
+							/>
+						</Image>
+						<Flex direction="column">
+							<Heading>{author.name}</Heading>
+							<Text color="fg.muted" whiteSpace="pre-wrap">
+								{excerpt}
+							</Text>
+						</Flex>
+					</Flex>
+					<ClientOnly>
+						<Text fontFamily="mono">
+							<DateFormatter dateString={date} />
+						</Text>
+					</ClientOnly>
 				</Flex>
 			</VStack>
 		</VStack>
