@@ -30,7 +30,7 @@ export function HeroPost({
 	excerpt: string;
 }) {
 	return (
-		<LinkBox maxW="2xl">
+		<LinkBox maxW="2xl" w="full">
 			<Card.Root rounded="lg">
 				<Card.Header mb={-2}>
 					<Flex justify="space-between">

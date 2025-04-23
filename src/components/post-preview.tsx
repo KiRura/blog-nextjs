@@ -8,6 +8,7 @@ import {
 	LinkOverlay,
 	Text,
 } from "@chakra-ui/react";
+import NextImage from "next/image";
 import NextLink from "next/link";
 import { DateFormatter } from "./date-formatter";
 
@@ -28,17 +29,25 @@ export function PostPreview({
 }) {
 	return (
 		<GridItem colSpan={1}>
-			<LinkBox maxW="2xl" h="100%">
+			<LinkBox maxW="2xl" h="full" w="full">
 				<Card.Root size="sm" h="100%">
 					<Card.Body>
 						<LinkOverlay href={`/posts/${slug}`} as={NextLink}>
 							<Card.Title>{title}</Card.Title>
 						</LinkOverlay>
+						<Card.Description>{excerpt}</Card.Description>
 					</Card.Body>
 					<Card.Footer>
 						<Flex direction="column" gap={3}>
-							<Image w="full" rounded="md" src={coverImage} />
-							<Text fontFamily="mono">
+							<Image w="full" rounded="md" aspectRatio={16 / 9} asChild>
+								<NextImage
+									src={coverImage}
+									alt="kirura twitter banner"
+									width={1280}
+									height={720}
+								/>
+							</Image>
+							<Text fontFamily="mono" fontStyle="italic" color="fg.subtle">
 								<DateFormatter dateString={date} />
 							</Text>
 						</Flex>

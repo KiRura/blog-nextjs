@@ -19,7 +19,7 @@ export default async function Post(props: Params) {
 
 	return (
 		<Container my={4} maxW="8xl" as="main" {...config.transitionAnimation}>
-			<Flex w="full" justify="space-evenly">
+			<Flex w="full" justify="space-evenly" gap={6}>
 				<PostHeading hide={false}>{post.content}</PostHeading>
 				<Flex direction="column" maxW="3xl" gap={4}>
 					<PostHeader
