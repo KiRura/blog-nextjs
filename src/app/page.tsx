@@ -69,7 +69,7 @@ export default function Index() {
 					</Flex>
 				</Flex>
 				<Separator my={6} />
-				<VStack>
+				<VStack gap={6}>
 					<Heading>Recent</Heading>
 					<MoreStories posts={morePosts} />
 				</VStack>
