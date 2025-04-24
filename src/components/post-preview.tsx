@@ -1,6 +1,7 @@
 import type { Author } from "@/interfaces/author";
 import {
 	Card,
+	ClientOnly,
 	Flex,
 	GridItem,
 	Image,
@@ -11,6 +12,7 @@ import {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { DateFormatter } from "./date-formatter";
+import { Skeleton } from "./ui/skeleton";
 
 export function PostPreview({
 	title,
@@ -47,9 +49,11 @@ export function PostPreview({
 									height={720}
 								/>
 							</Image>
-							<Text fontFamily="mono" fontStyle="italic" color="fg.subtle">
-								<DateFormatter dateString={date} />
-							</Text>
+							<ClientOnly fallback={<Skeleton w={24} />}>
+								<Text fontFamily="mono" fontStyle="italic" color="fg.subtle">
+									<DateFormatter dateString={date} />
+								</Text>
+							</ClientOnly>
 						</Flex>
 					</Card.Footer>
 				</Card.Root>
