@@ -39,7 +39,7 @@ export default function RootLayout({
 			className={`${inter.variable} ${notoSansJP.variable} ${jetBrainsMono.variable}`}
 		>
 			<head>
-				<link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+				{/* <link rel="alternate" type="application/rss+xml" href="/feed.xml" /> */}
 				<meta name="darkreader-lock" />
 			</head>
 			<body>

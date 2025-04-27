@@ -3,29 +3,31 @@
   "workspaces": {
     "": {
       "dependencies": {
-        "@chakra-ui/react": "latest",
-        "@emotion/react": "latest",
-        "classnames": "latest",
-        "date-fns": "latest",
-        "gray-matter": "latest",
-        "markdown-toc": "latest",
-        "next": "latest",
-        "next-themes": "latest",
-        "react": "latest",
-        "react-dom": "latest",
-        "react-icons": "latest",
-        "react-markdown": "latest",
-        "remark-gfm": "latest",
-        "remark-html": "latest",
+        "@chakra-ui/react": "^3.16.1",
+        "@emotion/react": "^11.14.0",
+        "classnames": "^2.5.1",
+        "date-fns": "^4.1.0",
+        "feed": "^4.2.2",
+        "gray-matter": "^4.0.3",
+        "markdown-toc": "^1.2.0",
+        "next": "15.3.1",
+        "next-themes": "^0.4.6",
+        "react": "19.1.0",
+        "react-dom": "19.1.0",
+        "react-icons": "^5.5.0",
+        "react-markdown": "^10.1.0",
+        "rehype-stringify": "^10.0.1",
+        "remark-gfm": "^4.0.1",
+        "remark-html": "^16.0.1",
       },
       "devDependencies": {
-        "@biomejs/biome": "latest",
-        "@types/node": "latest",
-        "@types/react": "latest",
-        "@types/react-dom": "latest",
-        "autoprefixer": "latest",
-        "postcss": "latest",
-        "typescript": "latest",
+        "@biomejs/biome": "^1.9.4",
+        "@types/node": "^22.15.2",
+        "@types/react": "^19.1.2",
+        "@types/react-dom": "^19.1.2",
+        "autoprefixer": "^10.4.21",
+        "postcss": "^8.5.3",
+        "typescript": "^5.8.3",
       },
     },
   },
@@ -385,6 +387,8 @@
 
     "fast-safe-stringify": ["fast-safe-stringify@2.1.1", "", {}, ""],
 
+    "feed": ["feed@4.2.2", "", { "dependencies": { "xml-js": "^1.6.11" } }, "sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ=="],
+
     "fill-range": ["fill-range@2.2.4", "", { "dependencies": { "is-number": "^2.1.0", "isobject": "^2.0.0", "randomatic": "^3.0.0", "repeat-element": "^1.1.2", "repeat-string": "^1.5.2" } }, "sha512-cnrcCbj01+j2gTG921VZPnHbjmdAf8oQV/iGeV2kZxGSyfYjjTyY79ErsK1WJWMpw6DaApEX72binqJE+/d+5Q=="],
 
     "find-root": ["find-root@1.1.0", "", {}, ""],
@@ -627,6 +631,8 @@
 
     "regenerator-runtime": ["regenerator-runtime@0.14.1", "", {}, ""],
 
+    "rehype-stringify": ["rehype-stringify@10.0.1", "", { "dependencies": { "@types/hast": "^3.0.0", "hast-util-to-html": "^9.0.0", "unified": "^11.0.0" } }, "sha512-k9ecfXHmIPuFVI61B9DeLPN0qFHfawM6RsuX48hoqlaKSF61RskNjSm1lI8PhBEM0MRdLxVVm4WmTqJQccH9mA=="],
+
     "remark-gfm": ["remark-gfm@4.0.1", "", { "dependencies": { "@types/mdast": "^4.0.0", "mdast-util-gfm": "^3.0.0", "micromark-extension-gfm": "^3.0.0", "remark-parse": "^11.0.0", "remark-stringify": "^11.0.0", "unified": "^11.0.0" } }, "sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg=="],
 
     "remark-html": ["remark-html@16.0.1", "", { "dependencies": { "@types/mdast": "^4.0.0", "hast-util-sanitize": "^5.0.0", "hast-util-to-html": "^9.0.0", "mdast-util-to-hast": "^13.0.0", "unified": "^11.0.0" } }, ""],
@@ -648,6 +654,8 @@
     "resolve-from": ["resolve-from@4.0.0", "", {}, ""],
 
     "safe-buffer": ["safe-buffer@5.1.2", "", {}, "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g=="],
+
+    "sax": ["sax@1.4.1", "", {}, "sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg=="],
 
     "scheduler": ["scheduler@0.26.0", "", {}, ""],
 
@@ -728,6 +736,8 @@
     "vfile": ["vfile@6.0.3", "", { "dependencies": { "@types/unist": "^3.0.0", "vfile-message": "^4.0.0" } }, ""],
 
     "vfile-message": ["vfile-message@4.0.2", "", { "dependencies": { "@types/unist": "^3.0.0", "unist-util-stringify-position": "^4.0.0" } }, ""],
+
+    "xml-js": ["xml-js@1.6.11", "", { "dependencies": { "sax": "^1.2.4" }, "bin": { "xml-js": "./bin/cli.js" } }, "sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g=="],
 
     "xtend": ["xtend@4.0.2", "", {}, "sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ=="],
 
