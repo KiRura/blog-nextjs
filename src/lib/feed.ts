@@ -1,10 +1,5 @@
 import { Feed } from "feed";
-import rehypeStringify from "rehype-stringify";
-import remarkGfm from "remark-gfm";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
-import { getAllPosts } from "./api";
+import { getPostListForRSS } from "./api";
 
 // https://qiita.com/kaeru333/items/3685f9231c9c07edb0e4
 
@@ -26,28 +21,15 @@ export async function generateRssFeed(): Promise<string> {
 		},
 	});
 
-	const posts = getAllPosts();
-	for (const post of posts) {
-		const file = await unified()
-			.use(remarkParse)
-			.use(remarkGfm)
-			.use(remarkRehype)
-			.use(rehypeStringify)
-			.process(post.content);
-
+	const posts = await getPostListForRSS();
+	for (const post of posts.contents) {
 		feed.addItem({
 			title: post.title,
-			description: post.excerpt,
-			date: new Date(post.date),
-			id: `${baseUrl}/posts/${post.slug}`,
-			link: `${baseUrl}/posts/${post.slug}`,
-			content: String(file),
-			author: [
-				{
-					name: post.author.name,
-				},
-			],
-			image: `${baseUrl}${post.coverImage}`,
+			description: post.subtitle,
+			date: new Date(post.createdAt),
+			id: post.id,
+			link: `${baseUrl}/posts/${post.id}`,
+			image: post.coverImage?.url,
 		});
 	}
 

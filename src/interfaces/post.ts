@@ -1,15 +1,24 @@
-import type { Author } from "./author";
+export type CoverImage = {
+	url: string;
+	height: number;
+	width: number;
+};
 
 export type Post = {
-	slug: string;
+	id: string;
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+	revisedAt: string;
 	title: string;
-	date: string;
-	coverImage: string;
-	author: Author;
-	excerpt: string;
-	ogImage: {
-		url: string;
-	};
+	subtitle: string;
+	coverImage?: CoverImage;
 	content: string;
-	preview?: boolean;
+};
+
+export type RssPost = {
+	id: string;
+	title: string;
+	subtitle: string;
+	coverImage?: CoverImage;
 };

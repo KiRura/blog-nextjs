@@ -1,15 +1,12 @@
 import { HeroPost } from "@/components/hero-post";
 import { MoreStories } from "@/components/more-stories";
-import { config } from "@/config";
-import { getAllPosts } from "@/lib/api";
+import { getPostListForRSS } from "@/lib/api";
 import { Container, Flex, Heading, Separator, VStack } from "@chakra-ui/react";
 
-export default function Index() {
-	const allPosts = getAllPosts();
-
-	const heroPost = allPosts[0];
-
-	const morePosts = allPosts.slice(1);
+export default async function Index() {
+	const allPosts = await getPostListForRSS();
+	const heroPost = allPosts.contents[0];
+	const morePosts = allPosts.contents.slice(1);
 
 	function LatestPostLabel({ hide }: { hide: boolean }) {
 		return (
@@ -44,12 +41,11 @@ export default function Index() {
 					lineHeight="unset"
 					fontWeight="extrabold"
 					letterSpacing="wider"
-					{...config.transitionAnimation}
 				>
 					KiRura
 				</Heading>
 			</Flex>
-			<Container maxW="8xl" {...config.transitionAnimation} my={6}>
+			<Container maxW="8xl" my={6}>
 				<Flex justify="center">
 					<Flex
 						gap={6}
@@ -60,10 +56,9 @@ export default function Index() {
 						<HeroPost
 							title={heroPost.title}
 							coverImage={heroPost.coverImage}
-							date={heroPost.date}
-							author={heroPost.author}
-							slug={heroPost.slug}
-							excerpt={heroPost.excerpt}
+							createdAt={heroPost.createdAt}
+							id={heroPost.id}
+							subtitle={heroPost.subtitle}
 						/>
 						<LatestPostLabel hide />
 					</Flex>

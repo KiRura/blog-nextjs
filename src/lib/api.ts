@@ -1,28 +1,37 @@
-import fs from "node:fs";
-import { join } from "node:path";
-import type { Post } from "@/interfaces/post";
-import matter from "gray-matter";
+import type { Post, RssPost } from "@/interfaces/post";
+import { type MicroCMSListResponse, createClient } from "microcms-js-sdk";
 
-const postsDirectory = join(process.cwd(), "_posts");
+if (!process.env.MICRO_CMS_API_KEY)
+	throw new Error("microcms api key is undefined");
 
-export function getPostSlugs() {
-	return fs.readdirSync(postsDirectory);
+const cmsClient = createClient({
+	apiKey: process.env.MICRO_CMS_API_KEY,
+	serviceDomain: "kirura",
+});
+
+export async function getPostSlugs() {
+	return await cmsClient.getAllContentIds({
+		endpoint: "blog",
+	});
 }
 
-export function getPostBySlug(slug: string) {
-	const realSlug = slug.replace(/\.md$/, "");
-	const fullPath = join(postsDirectory, `${realSlug}.md`);
-	const fileContents = fs.readFileSync(fullPath, "utf8");
-	const { data, content } = matter(fileContents);
+export async function getPostBySlug(slug: string) {
+	const post: Post = await cmsClient.getListDetail({
+		endpoint: "blog",
+		contentId: slug,
+	});
 
-	return { ...data, slug: realSlug, content } as Post;
+	return post;
 }
 
-export function getAllPosts(): Post[] {
-	const slugs = getPostSlugs();
-	const posts = slugs
-		.map((slug) => getPostBySlug(slug))
-		// sort posts by date in descending order
-		.sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+export async function getPostListForRSS() {
+	const posts: MicroCMSListResponse<RssPost> = await cmsClient.getList({
+		endpoint: "blog",
+		queries: {
+			fields: "id,title,excerpt,coverImage,createdAt",
+			orders: "createdAt",
+		},
+	});
+
 	return posts;
 }

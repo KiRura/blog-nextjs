@@ -1,9 +1,12 @@
-import type { Post } from "@/interfaces/post";
+import type { RssPost } from "@/interfaces/post";
 import { EmptyState, Grid, VStack } from "@chakra-ui/react";
+import type { MicroCMSContentId, MicroCMSDate } from "microcms-js-sdk";
 import { FaBatteryEmpty } from "react-icons/fa6";
 import { PostPreview } from "./post-preview";
 
-export function MoreStories({ posts }: { posts: Post[] }) {
+export function MoreStories({
+	posts,
+}: { posts: (RssPost & MicroCMSContentId & MicroCMSDate)[] }) {
 	if (!posts.length)
 		return (
 			<EmptyState.Root>
@@ -33,13 +36,12 @@ export function MoreStories({ posts }: { posts: Post[] }) {
 		>
 			{posts.map((post) => (
 				<PostPreview
-					key={post.slug}
+					key={post.id}
 					title={post.title}
 					coverImage={post.coverImage}
-					date={post.date}
-					author={post.author}
-					slug={post.slug}
-					excerpt={post.excerpt}
+					date={post.createdAt}
+					id={post.id}
+					subtitle={post.subtitle}
 				/>
 			))}
 		</Grid>

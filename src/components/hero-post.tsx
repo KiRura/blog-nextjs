@@ -1,9 +1,8 @@
-import type { Author } from "@/interfaces/author";
+import type { CoverImage } from "@/interfaces/post";
 import {
 	Card,
 	ClientOnly,
 	Flex,
-	HStack,
 	Image,
 	LinkBox,
 	LinkOverlay,
@@ -17,34 +16,21 @@ import { Skeleton } from "./ui/skeleton";
 export function HeroPost({
 	title,
 	coverImage,
-	date,
-	author,
-	slug,
-	excerpt,
+	createdAt,
+	id,
+	subtitle,
 }: {
 	title: string;
-	coverImage: string;
-	date: string;
-	author: Author;
-	slug: string;
-	excerpt: string;
+	coverImage?: CoverImage;
+	createdAt: string;
+	id: string;
+	subtitle: string;
 }) {
 	return (
 		<LinkBox maxW="2xl" w="full">
 			<Card.Root rounded="lg">
 				<Card.Header mb={-2}>
 					<Flex justify="space-between">
-						<HStack>
-							<Image rounded="full" boxSize={6} asChild>
-								<NextImage
-									src={author.picture}
-									alt={`${author.name} icon`}
-									width={128}
-									height={128}
-								/>
-							</Image>
-							<Text>{author.name}</Text>
-						</HStack>
 						<ClientOnly fallback={<Skeleton w={24} />}>
 							<Text
 								fontFamily="mono"
@@ -52,25 +38,27 @@ export function HeroPost({
 								fontStyle="italic"
 								textAlign="end"
 							>
-								<DateFormatter dateString={date} />
+								<DateFormatter dateString={createdAt} />
 							</Text>
 						</ClientOnly>
 					</Flex>
 				</Card.Header>
 				<Card.Body>
 					<Flex direction="column" gap={2}>
-						<LinkOverlay href={`/posts/${slug}`} as={NextLink}>
+						<LinkOverlay href={`/posts/${id}`} as={NextLink}>
 							<Card.Title fontSize="2xl">{title}</Card.Title>
 						</LinkOverlay>
-						<Card.Description fontSize="md">{excerpt}</Card.Description>
-						<Image mt={3} aspectRatio={16 / 9} w="full" rounded="md" asChild>
-							<NextImage
-								src={coverImage}
-								alt={title}
-								width={1280}
-								height={720}
-							/>
-						</Image>
+						<Card.Description fontSize="md">{subtitle}</Card.Description>
+						{coverImage ? (
+							<Image mt={3} aspectRatio={16 / 9} w="full" rounded="md" asChild>
+								<NextImage
+									src={coverImage.url}
+									alt={title}
+									width={coverImage.width}
+									height={coverImage.height}
+								/>
+							</Image>
+						) : null}
 					</Flex>
 				</Card.Body>
 			</Card.Root>
