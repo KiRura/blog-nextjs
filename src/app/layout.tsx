@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
 
-import "./globals.css";
 import { Header } from "@/components/header";
 import { Provider } from "@/components/ui/provider";
 
