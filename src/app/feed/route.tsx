@@ -1,7 +1,8 @@
 import { generateRssFeed } from "@/lib/feed";
 import { NextResponse } from "next/server";
 
-export const runtime = "edge";
+export const dynamic = "force-static";
+export const revalidate = 60;
 
 export async function GET() {
 	const xml = await generateRssFeed();

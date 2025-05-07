@@ -1,13 +1,16 @@
 import { PostHeader } from "@/components/post-header";
 import { Prose } from "@/components/ui/prose-custom";
-import { getPostBySlug } from "@/lib/api";
+import { getPostBySlug, getPostSlugs } from "@/lib/api";
 import { Container, Separator } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 export default async function Post(props: Params) {
 	const params = await props.params;
-	const post = await getPostBySlug(params.slug);
+	const post = await getPostBySlug(params.slug).catch(() => notFound());
 
 	return (
 		<Container my={4} maxW="4xl" as="main">
@@ -48,4 +51,12 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 			card: "summary_large_image",
 		},
 	};
+}
+
+export async function generateStaticParams() {
+	const ids = await getPostSlugs();
+
+	return ids.map((id) => ({
+		slug: id,
+	}));
 }

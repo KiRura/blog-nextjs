@@ -10,15 +10,22 @@ const cmsClient = createClient({
 });
 
 export async function getPostSlugs() {
-	return await cmsClient.getAllContentIds({
+	const ids = await cmsClient.getAllContentIds({
 		endpoint: "blog",
 	});
+
+	return ids;
 }
 
 export async function getPostBySlug(slug: string) {
 	const post: Post = await cmsClient.getListDetail({
 		endpoint: "blog",
 		contentId: slug,
+		customRequestInit: {
+			next: {
+				revalidate: 60,
+			},
+		},
 	});
 
 	return post;
@@ -28,8 +35,13 @@ export async function getPostListForRSS() {
 	const posts: MicroCMSListResponse<RssPost> = await cmsClient.getList({
 		endpoint: "blog",
 		queries: {
-			fields: "id,title,excerpt,coverImage,createdAt",
+			fields: "id,title,subtitle,coverImage,createdAt",
 			orders: "createdAt",
+		},
+		customRequestInit: {
+			next: {
+				revalidate: 60,
+			},
 		},
 	});
 
