@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
 
 import { Header } from "@/components/header";
@@ -15,15 +15,19 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "KiRura Blog",
+	title: { template: "%s - KiRura Blog", default: "KiRura Blog" },
 	description: "しがない個人ブログ",
-	icons: "https://blog.kirura.f5.si/favicon/favicon.ico",
+	icons: "/favicon/favicon.ico",
 	openGraph: {
-		images: "https://blog.kirura.f5.si/favicon/kirura.jpg",
+		images: "https://kirura-blog.vercel.app/favicon/kirura.jpg",
 	},
 	twitter: {
 		card: "summary",
 	},
+};
+
+export const viewport: Viewport = {
+	themeColor: "#FFBF7F",
 };
 
 export default function RootLayout({

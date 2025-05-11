@@ -4,7 +4,7 @@ import { getPostListForRSS } from "./api";
 // https://qiita.com/kaeru333/items/3685f9231c9c07edb0e4
 
 export async function generateRssFeed(): Promise<string> {
-	const baseUrl = "https://blog.kirura.f5.si";
+	const baseUrl = "https://kirura-blog.vercel.app";
 	const feed = new Feed({
 		title: "KiRura Blog",
 		description: "しがない個人ブログ",
