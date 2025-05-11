@@ -36,7 +36,7 @@ export async function getPostListForRSS() {
 		endpoint: "blog",
 		queries: {
 			fields: "id,title,subtitle,coverImage,createdAt",
-			orders: "createdAt",
+			orders: "-publishedAt",
 		},
 		customRequestInit: {
 			next: {
