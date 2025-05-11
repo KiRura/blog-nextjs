@@ -1,8 +1,18 @@
-import { PostHeader } from "@/components/post-header";
+import { DateFormatter } from "@/components/date-formatter";
 import { Prose } from "@/components/ui/prose-custom";
 import { getPostBySlug, getPostSlugs } from "@/lib/api";
-import { Container, Separator } from "@chakra-ui/react";
+import {
+	Box,
+	ClientOnly,
+	Container,
+	Flex,
+	Heading,
+	Image,
+	Separator,
+	Text,
+} from "@chakra-ui/react";
 import type { Metadata } from "next";
+import NextImage from "next/image";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-static";
@@ -13,16 +23,37 @@ export default async function Post(props: Params) {
 	const post = await getPostBySlug(params.slug).catch(() => notFound());
 
 	return (
-		<Container my={4} maxW="4xl" as="main">
-			<PostHeader
-				title={post.title}
-				coverImage={post.coverImage}
-				date={post.createdAt}
-				subtitle={post.subtitle}
-			/>
-			<Separator />
-			{/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
-			<Prose size="lg" dangerouslySetInnerHTML={{ __html: post.content }} />
+		<Container py="6" maxW="4xl" as="main" centerContent>
+			<Box spaceY="9" mb="9" w="full">
+				{post.coverImage ? (
+					<Image asChild rounded="lg">
+						<NextImage
+							src={post.coverImage.url}
+							alt={post.title}
+							height={post.coverImage.height}
+							width={post.coverImage.width}
+						/>
+					</Image>
+				) : null}
+				<Flex direction="column" w="full" gap="2">
+					<Heading size={{ mdDown: "5xl", md: "6xl", lg: "7xl" }}>
+						{post.title}
+					</Heading>
+					<Flex justify="space-between">
+						<Text color="fg.muted">{post.subtitle}</Text>
+						<ClientOnly>
+							<Text fontFamily="mono" color="fg.muted" fontStyle="italic">
+								<DateFormatter dateString={post.createdAt} />
+							</Text>
+						</ClientOnly>
+					</Flex>
+				</Flex>
+			</Box>
+			<Separator w="full" />
+			<Flex w="full">
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+				<Prose size="lg" dangerouslySetInnerHTML={{ __html: post.content }} />
+			</Flex>
 		</Container>
 	);
 }
@@ -44,9 +75,11 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 	return {
 		title: post.title,
 		description: post.subtitle,
-		openGraph: {
-			images: post.coverImage?.url,
-		},
+		...(post.coverImage && {
+			openGraph: {
+				images: post.coverImage.url,
+			},
+		}),
 		twitter: {
 			card: "summary_large_image",
 		},
