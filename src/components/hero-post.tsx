@@ -29,9 +29,12 @@ export function HeroPost({
 	return (
 		<LinkBox maxW="2xl" w="full">
 			<Card.Root rounded="lg">
-				<Card.Header mb={-2}>
+				<Card.Header>
 					<Flex justify="space-between">
-						<ClientOnly fallback={<Skeleton w={24} />}>
+						<LinkOverlay href={`/posts/${id}`} as={NextLink}>
+							<Card.Title fontSize="2xl">{title}</Card.Title>
+						</LinkOverlay>
+						<ClientOnly fallback={<Skeleton w="24" />}>
 							<Text
 								fontFamily="mono"
 								color="fg.subtle"
@@ -42,24 +45,19 @@ export function HeroPost({
 							</Text>
 						</ClientOnly>
 					</Flex>
+					<Card.Description fontSize="md">{subtitle}</Card.Description>
 				</Card.Header>
 				<Card.Body>
-					<Flex direction="column" gap={2}>
-						<LinkOverlay href={`/posts/${id}`} as={NextLink}>
-							<Card.Title fontSize="2xl">{title}</Card.Title>
-						</LinkOverlay>
-						<Card.Description fontSize="md">{subtitle}</Card.Description>
-						{coverImage ? (
-							<Image mt={3} aspectRatio={16 / 9} w="full" rounded="md" asChild>
-								<NextImage
-									src={coverImage.url}
-									alt={title}
-									width={coverImage.width}
-									height={coverImage.height}
-								/>
-							</Image>
-						) : null}
-					</Flex>
+					{coverImage ? (
+						<Image aspectRatio={16 / 9} w="full" rounded="md" asChild>
+							<NextImage
+								src={coverImage.url}
+								alt={title}
+								width={coverImage.width}
+								height={coverImage.height}
+							/>
+						</Image>
+					) : null}
 				</Card.Body>
 			</Card.Root>
 		</LinkBox>

@@ -1,5 +1,5 @@
 import type { RssPost } from "@/interfaces/post";
-import { EmptyState, Grid, VStack } from "@chakra-ui/react";
+import { EmptyState, SimpleGrid, VStack } from "@chakra-ui/react";
 import type { MicroCMSContentId, MicroCMSDate } from "microcms-js-sdk";
 import { FaBatteryEmpty } from "react-icons/fa6";
 import { PostPreview } from "./post-preview";
@@ -24,15 +24,14 @@ export function MoreStories({
 			</EmptyState.Root>
 		);
 	return (
-		<Grid
-			templateColumns={{
-				smDown: "repeat(1, 1fr)",
-				sm: "repeat(1, 1fr)",
-				md: "repeat(2, 1fr)",
-				lg: "repeat(3, 1fr)",
+		<SimpleGrid
+			columns={{
+				mdDown: 1,
+				md: 2,
+				lg: 3,
 			}}
 			w="full"
-			gap={2}
+			gap="2"
 		>
 			{posts.map((post) => (
 				<PostPreview
@@ -44,6 +43,6 @@ export function MoreStories({
 					subtitle={post.subtitle}
 				/>
 			))}
-		</Grid>
+		</SimpleGrid>
 	);
 }

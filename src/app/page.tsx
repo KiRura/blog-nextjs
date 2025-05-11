@@ -1,7 +1,7 @@
 import { HeroPost } from "@/components/hero-post";
 import { MoreStories } from "@/components/more-stories";
 import { getPostListForRSS } from "@/lib/api";
-import { Container, Flex, Heading, Separator, VStack } from "@chakra-ui/react";
+import { Container, Flex, Heading, Stack } from "@chakra-ui/react";
 
 export default async function Index() {
 	const allPosts = await getPostListForRSS();
@@ -45,29 +45,30 @@ export default async function Index() {
 					KiRura
 				</Heading>
 			</Flex>
-			<Container maxW="8xl" my={6}>
-				<Flex justify="center">
-					<Flex
-						gap={6}
-						align="center"
-						direction={{ lgDown: "column", lg: "row" }}
-					>
-						<LatestPostLabel hide={false} />
-						<HeroPost
-							title={heroPost.title}
-							coverImage={heroPost.coverImage}
-							createdAt={heroPost.createdAt}
-							id={heroPost.id}
-							subtitle={heroPost.subtitle}
-						/>
-						<LatestPostLabel hide />
-					</Flex>
-				</Flex>
-				<Separator my={6} />
-				<VStack gap={6}>
-					<Heading>Recent</Heading>
-					<MoreStories posts={morePosts} />
-				</VStack>
+			<Container
+				maxW="8xl"
+				centerContent
+				spaceY={{ lgDown: "4", lg: "6" }}
+				py={{ lgDown: "4", lg: "6" }}
+			>
+				<Stack
+					gap={{ lgDown: "4", lg: "6" }}
+					align="center"
+					direction={{ lgDown: "column", lg: "row" }}
+				>
+					<LatestPostLabel hide={false} />
+					<HeroPost
+						title={heroPost.title}
+						coverImage={heroPost.coverImage}
+						createdAt={heroPost.createdAt}
+						id={heroPost.id}
+						subtitle={heroPost.subtitle}
+					/>
+					<LatestPostLabel hide />
+				</Stack>
+				{/* <Separator w="full" /> */}
+				<Heading>Recent</Heading>
+				<MoreStories posts={morePosts} />
 			</Container>
 		</>
 	);
