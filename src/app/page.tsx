@@ -54,7 +54,9 @@ export default async function Index() {
 				<Stack
 					gap={{ lgDown: "4", lg: "6" }}
 					align="center"
+					justify="center"
 					direction={{ lgDown: "column", lg: "row" }}
+					w="full"
 				>
 					<LatestPostLabel hide={false} />
 					<HeroPost

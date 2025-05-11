@@ -1,5 +1,6 @@
 import type { CoverImage } from "@/interfaces/post";
 import {
+	Box,
 	Card,
 	ClientOnly,
 	Flex,
@@ -29,25 +30,26 @@ export function HeroPost({
 	return (
 		<LinkBox maxW="2xl" w="full">
 			<Card.Root rounded="lg">
-				<Card.Header>
-					<Flex justify="space-between">
-						<LinkOverlay href={`/posts/${id}`} as={NextLink}>
-							<Card.Title fontSize="2xl">{title}</Card.Title>
-						</LinkOverlay>
-						<ClientOnly fallback={<Skeleton w="24" />}>
-							<Text
-								fontFamily="mono"
-								color="fg.subtle"
-								fontStyle="italic"
-								textAlign="end"
-							>
-								<DateFormatter dateString={createdAt} />
-							</Text>
-						</ClientOnly>
-					</Flex>
-					<Card.Description fontSize="md">{subtitle}</Card.Description>
-				</Card.Header>
-				<Card.Body>
+				<Card.Body gap="6">
+					<Box spaceY="1.5">
+						<Flex justify="space-between">
+							<LinkOverlay href={`/posts/${id}`} as={NextLink}>
+								<Card.Title fontSize="2xl">{title}</Card.Title>
+							</LinkOverlay>
+							<ClientOnly fallback={<Skeleton w="24" />}>
+								<Text
+									fontFamily="mono"
+									color="fg.subtle"
+									fontStyle="italic"
+									textAlign="end"
+								>
+									<DateFormatter dateString={createdAt} />
+								</Text>
+							</ClientOnly>
+						</Flex>
+						<Card.Description fontSize="md">{subtitle}</Card.Description>
+					</Box>
+
 					{coverImage ? (
 						<Image aspectRatio={16 / 9} w="full" rounded="md" asChild>
 							<NextImage
