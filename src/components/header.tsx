@@ -7,19 +7,12 @@ import {
 	Image,
 	Link,
 } from "@chakra-ui/react";
-import NextImage, { getImageProps } from "next/image";
+import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import { ColorModeButton } from "./ui/color-mode-custom";
 
 export function Header() {
-	const avatarImageProps = getImageProps({
-		src: "/assets/blog/authors/kirura.jpg",
-		alt: "kirura icon",
-		width: 400,
-		height: 400,
-	}).props;
-
 	return (
 		<Box
 			as="header"
@@ -36,7 +29,7 @@ export function Header() {
 							<HStack>
 								<Image rounded="full" boxSize={8} asChild>
 									<NextImage
-										src="/assets/blog/authors/kirura.jpg"
+										src="/favicon/kirura.jpg"
 										alt="kirura icon"
 										width={400}
 										height={400}
