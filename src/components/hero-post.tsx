@@ -36,7 +36,7 @@ export function HeroPost({
 							<LinkOverlay href={`/posts/${id}`} as={NextLink}>
 								<Card.Title fontSize="2xl">{title}</Card.Title>
 							</LinkOverlay>
-							<ClientOnly fallback={<Skeleton w="24" />}>
+							<ClientOnly fallback={<Skeleton w="24" h="1.5rem" />}>
 								<Text
 									fontFamily="mono"
 									color="fg.subtle"

@@ -40,7 +40,7 @@ export default async function Post(props: Params) {
 					<Heading size={{ mdDown: "5xl", md: "6xl", lg: "7xl" }}>
 						{post.title}
 					</Heading>
-					<Flex justify="space-between">
+					<Flex justify="space-between" align="end">
 						<Text color="fg.muted">{post.subtitle}</Text>
 						<ClientOnly>
 							<Text fontFamily="mono" color="fg.muted" fontStyle="italic">
