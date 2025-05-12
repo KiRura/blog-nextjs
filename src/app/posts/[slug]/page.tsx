@@ -15,6 +15,8 @@ import type { Metadata } from "next";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 
+export const revalidate = 60;
+
 export default async function Post(props: Params) {
 	const params = await props.params;
 	const post = await getPostBySlug(params.slug).catch(() => {});
@@ -81,4 +83,8 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 			},
 		}),
 	};
+}
+
+export function generateStaticParams() {
+	return [];
 }
