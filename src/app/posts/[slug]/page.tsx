@@ -1,9 +1,8 @@
-import { DateFormatter } from "@/components/date-formatter";
+import { Dates } from "@/components/dates";
 import { Prose } from "@/components/ui/prose-custom";
 import { getPostBySlug } from "@/lib/api";
 import {
 	Box,
-	ClientOnly,
 	Container,
 	Flex,
 	Heading,
@@ -40,13 +39,13 @@ export default async function Post(props: Params) {
 					<Heading size={{ mdDown: "5xl", md: "6xl", lg: "7xl" }}>
 						{post.title}
 					</Heading>
-					<Flex justify="space-between" align="end">
+					<Flex justify="space-between" align="end" gap="9">
 						<Text color="fg.muted">{post.subtitle}</Text>
-						<ClientOnly>
-							<Text fontFamily="mono" color="fg.muted" fontStyle="italic">
-								<DateFormatter dateString={post.createdAt} />
-							</Text>
-						</ClientOnly>
+						<Dates
+							publishedAt={post.publishedAt}
+							updatedAt={post.updatedAt}
+							direction="column"
+						/>
 					</Flex>
 				</Flex>
 			</Box>

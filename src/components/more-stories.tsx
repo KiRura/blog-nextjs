@@ -38,7 +38,8 @@ export function MoreStories({
 					key={post.id}
 					title={post.title}
 					coverImage={post.coverImage}
-					date={post.createdAt}
+					publishedAt={post.publishedAt}
+					updatedAt={post.updatedAt}
 					id={post.id}
 					subtitle={post.subtitle}
 				/>

@@ -62,7 +62,8 @@ export default async function Index() {
 					<HeroPost
 						title={heroPost.title}
 						coverImage={heroPost.coverImage}
-						createdAt={heroPost.createdAt}
+						publishedAt={heroPost.publishedAt}
+						updatedAt={heroPost.updatedAt}
 						id={heroPost.id}
 						subtitle={heroPost.subtitle}
 					/>

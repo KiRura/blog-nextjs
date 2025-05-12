@@ -1,28 +1,21 @@
 import type { CoverImage } from "@/interfaces/post";
-import {
-	Box,
-	Card,
-	ClientOnly,
-	Image,
-	LinkBox,
-	LinkOverlay,
-	Text,
-} from "@chakra-ui/react";
+import { Box, Card, Image, LinkBox, LinkOverlay } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { DateFormatter } from "./date-formatter";
-import { Skeleton } from "./ui/skeleton";
+import { Dates } from "./dates";
 
 export function PostPreview({
 	title,
 	coverImage,
-	date,
+	publishedAt,
+	updatedAt,
 	id,
 	subtitle,
 }: {
 	title: string;
 	coverImage?: CoverImage;
-	date: string;
+	publishedAt?: string;
+	updatedAt: string;
 	id: string;
 	subtitle: string;
 }) {
@@ -47,18 +40,15 @@ export function PostPreview({
 						</Image>
 					) : null}
 				</Card.Body>
-				<Card.Footer>
-					<ClientOnly fallback={<Skeleton w="24" h="1.5rem" />}>
-						<Text
-							fontSize="md"
-							fontFamily="mono"
-							fontStyle="italic"
-							color="fg.subtle"
-						>
-							<DateFormatter dateString={date} />
-						</Text>
-					</ClientOnly>
-				</Card.Footer>
+				{publishedAt ? (
+					<Card.Footer justifyContent="end">
+						<Dates
+							publishedAt={publishedAt}
+							updatedAt={updatedAt}
+							direction="row"
+						/>
+					</Card.Footer>
+				) : null}
 			</Card.Root>
 		</LinkBox>
 	);
