@@ -1,6 +1,6 @@
 import { DateFormatter } from "@/components/date-formatter";
 import { Prose } from "@/components/ui/prose-custom";
-import { getPostBySlug, getPostSlugs } from "@/lib/api";
+import { getPostBySlug } from "@/lib/api";
 import {
 	Box,
 	ClientOnly,
@@ -15,12 +15,11 @@ import type { Metadata } from "next";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 
-export const dynamic = "force-static";
-export const dynamicParams = false;
-
 export default async function Post(props: Params) {
 	const params = await props.params;
-	const post = await getPostBySlug(params.slug).catch(() => notFound());
+	const post = await getPostBySlug(params.slug).catch(() => {});
+
+	if (!post) notFound();
 
 	return (
 		<Container py="6" maxW="4xl" as="main" centerContent>
@@ -66,11 +65,9 @@ export type Params = {
 
 export async function generateMetadata(props: Params): Promise<Metadata> {
 	const params = await props.params;
-	const post = await getPostBySlug(params.slug);
+	const post = await getPostBySlug(params.slug).catch(() => {});
 
-	if (!post) {
-		return notFound();
-	}
+	if (!post) notFound();
 
 	return {
 		title: post.title,
@@ -79,17 +76,9 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 			openGraph: {
 				images: post.coverImage.url,
 			},
+			twitter: {
+				card: "summary_large_image",
+			},
 		}),
-		twitter: {
-			card: "summary_large_image",
-		},
 	};
-}
-
-export async function generateStaticParams() {
-	const ids = await getPostSlugs();
-
-	return ids.map((id) => ({
-		slug: id,
-	}));
 }
