@@ -82,7 +82,7 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 				card: "summary_large_image",
 			},
 		}),
-		applicationName: "KiRura Blog",
+		authors: { name: "KiRura Blog" },
 	};
 }
 
