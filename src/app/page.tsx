@@ -1,6 +1,8 @@
 import { Container, Flex, Heading, Stack } from "@chakra-ui/react";
+import { FaBookOpen } from "react-icons/fa6";
 import { HeroPost } from "@/components/hero-post";
 import { MoreStories } from "@/components/more-stories";
+import { Aria } from "@/components/ui/aria";
 import { getPostListForRSS } from "@/lib/api";
 
 function LatestPostLabel({ hide }: { hide: boolean }) {
@@ -69,9 +71,9 @@ export default async function Index() {
 					/>
 					<LatestPostLabel hide />
 				</Stack>
-				{/* <Separator w="full" /> */}
-				<Heading>Recent</Heading>
-				<MoreStories posts={morePosts} />
+				<Aria title="Recent" icon={<FaBookOpen />}>
+					<MoreStories posts={morePosts} />
+				</Aria>
 			</Container>
 		</>
 	);
