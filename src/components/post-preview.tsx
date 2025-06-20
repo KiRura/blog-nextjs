@@ -20,17 +20,18 @@ export function PostPreview({
 	subtitle: string;
 }) {
 	return (
-		<LinkBox maxW="2xl">
+		<LinkBox>
 			<Card.Root size="sm" h="full">
-				<Card.Body gap="4">
-					<Box spaceY="1">
-						<LinkOverlay href={`/posts/${id}`} as={NextLink}>
-							<Card.Title>{title}</Card.Title>
-						</LinkOverlay>
-						<Card.Description>{subtitle}</Card.Description>
-					</Box>
+				<Card.Body flexDir="row" gap="4">
 					{coverImage ? (
-						<Image w="full" rounded="md" aspectRatio={16 / 9} asChild>
+						<Image
+							maxW="24"
+							w="full"
+							h="fit"
+							rounded="md"
+							aspectRatio={4 / 3}
+							asChild
+						>
 							<NextImage
 								src={coverImage.url}
 								alt={title}
@@ -39,6 +40,12 @@ export function PostPreview({
 							/>
 						</Image>
 					) : null}
+					<Box spaceY="1">
+						<LinkOverlay href={`/posts/${id}`} as={NextLink}>
+							<Card.Title>{title}</Card.Title>
+						</LinkOverlay>
+						<Card.Description>{subtitle}</Card.Description>
+					</Box>
 				</Card.Body>
 				{publishedAt ? (
 					<Card.Footer justifyContent="end">
