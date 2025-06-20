@@ -1,16 +1,19 @@
 import {
 	Box,
+	ButtonGroup,
+	ClientOnly,
 	Container,
 	Flex,
 	HStack,
 	IconButton,
 	Image,
 	Link,
+	Skeleton,
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { ColorModeButton } from "./ui/color-mode";
+import { Settings } from "./settings";
 
 export function Header() {
 	return (
@@ -39,8 +42,8 @@ export function Header() {
 							</HStack>
 						</NextLink>
 					</Link>
-					<HStack>
-						<IconButton asChild aria-label="Source" variant="ghost">
+					<ButtonGroup variant="outline">
+						<IconButton asChild aria-label="Source">
 							<NextLink
 								href="https://github.com/KiRura/blog-nextjs"
 								target="_blank"
@@ -48,8 +51,10 @@ export function Header() {
 								<FaGithub />
 							</NextLink>
 						</IconButton>
-						<ColorModeButton />
-					</HStack>
+						<ClientOnly fallback={<Skeleton boxSize="10" />}>
+							<Settings />
+						</ClientOnly>
+					</ButtonGroup>
 				</Flex>
 			</Container>
 		</Box>
