@@ -1,5 +1,5 @@
-import { generateRssFeed } from "@/lib/feed";
 import { NextResponse } from "next/server";
+import { generateRssFeed } from "@/lib/feed";
 
 export const revalidate = 60;
 

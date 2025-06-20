@@ -1,7 +1,7 @@
-import type { CoverImage } from "@/interfaces/post";
 import { Box, Card, Image, LinkBox, LinkOverlay } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
+import type { CoverImage } from "@/interfaces/post";
 import { Dates } from "./dates";
 
 export function PostPreview({

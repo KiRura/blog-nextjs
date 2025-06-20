@@ -1,25 +1,25 @@
+import { Container, Flex, Heading, Stack } from "@chakra-ui/react";
 import { HeroPost } from "@/components/hero-post";
 import { MoreStories } from "@/components/more-stories";
 import { getPostListForRSS } from "@/lib/api";
-import { Container, Flex, Heading, Stack } from "@chakra-ui/react";
+
+function LatestPostLabel({ hide }: { hide: boolean }) {
+	return (
+		<Flex
+			direction={{ lgDown: "row", lg: "column" }}
+			visibility={hide ? "hidden" : "visible"}
+			display={hide ? { lgDown: "none", lg: "flex" } : "flex"}
+			whiteSpace={{ lgDown: "normal", lg: "pre-wrap" }}
+		>
+			<Heading size="7xl">{"The\nLatest\nPost"}</Heading>
+		</Flex>
+	);
+}
 
 export default async function Index() {
 	const allPosts = await getPostListForRSS();
 	const heroPost = allPosts.contents[0];
 	const morePosts = allPosts.contents.slice(1);
-
-	function LatestPostLabel({ hide }: { hide: boolean }) {
-		return (
-			<Flex
-				direction={{ lgDown: "row", lg: "column" }}
-				visibility={hide ? "hidden" : "visible"}
-				display={hide ? { lgDown: "none", lg: "flex" } : "flex"}
-				whiteSpace={{ lgDown: "normal", lg: "pre-wrap" }}
-			>
-				<Heading size="7xl">{"The\nLatest\nPost"}</Heading>
-			</Flex>
-		);
-	}
 
 	return (
 		<>

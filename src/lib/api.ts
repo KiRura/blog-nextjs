@@ -1,5 +1,5 @@
+import { createClient, type MicroCMSListResponse } from "microcms-js-sdk";
 import type { Post, RssPost } from "@/interfaces/post";
-import { type MicroCMSListResponse, createClient } from "microcms-js-sdk";
 
 if (!process.env.MICRO_CMS_API_KEY)
 	throw new Error("microcms api key is undefined");

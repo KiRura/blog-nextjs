@@ -10,7 +10,7 @@ import {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { ColorModeButton } from "./ui/color-mode-custom";
+import { ColorModeButton } from "./ui/color-mode";
 
 export function Header() {
 	return (

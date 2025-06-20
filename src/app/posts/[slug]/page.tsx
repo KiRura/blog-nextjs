@@ -1,6 +1,3 @@
-import { Dates } from "@/components/dates";
-import { Prose } from "@/components/ui/prose-custom";
-import { getPostBySlug } from "@/lib/api";
 import {
 	Box,
 	Container,
@@ -13,6 +10,9 @@ import {
 import type { Metadata } from "next";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
+import { Dates } from "@/components/dates";
+import { Prose } from "@/components/ui/prose";
+import { getPostBySlug } from "@/lib/api";
 
 export const revalidate = 60;
 
@@ -51,7 +51,7 @@ export default async function Post(props: Params) {
 			</Box>
 			<Separator w="full" />
 			<Flex w="full">
-				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: <false> */}
 				<Prose size="lg" dangerouslySetInnerHTML={{ __html: post.content }} />
 			</Flex>
 		</Container>

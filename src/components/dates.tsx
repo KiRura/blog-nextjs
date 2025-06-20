@@ -14,7 +14,11 @@ export function Dates({
 	publishedAt,
 	updatedAt,
 	direction,
-}: { publishedAt: string; updatedAt: string; direction: "column" | "row" }) {
+}: {
+	publishedAt: string;
+	updatedAt: string;
+	direction: "column" | "row";
+}) {
 	return (
 		<ClientOnly
 			fallback={
