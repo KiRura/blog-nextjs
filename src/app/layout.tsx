@@ -15,11 +15,12 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://blog.kirura.f5.si"),
 	title: { template: "%s - KiRura Blog", default: "KiRura Blog" },
 	description: "しがない個人ブログ",
 	icons: "/favicon/favicon.ico",
 	openGraph: {
-		images: "https://kirura-blog.vercel.app/favicon/kirura.jpg",
+		images: "/favicon/kirura.jpg",
 	},
 	twitter: {
 		card: "summary",
