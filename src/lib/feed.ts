@@ -23,10 +23,11 @@ export async function generateRssFeed(): Promise<string> {
 
 	const posts = await getPostListForRSS();
 	for (const post of posts.contents) {
+		console.log(post.createdAt);
 		feed.addItem({
 			title: post.title,
 			description: post.subtitle,
-			date: new Date(post.createdAt),
+			date: new Date(post.publishedAt ?? post.createdAt),
 			id: post.id,
 			link: `${baseUrl}/posts/${post.id}`,
 			image: post.coverImage?.url,

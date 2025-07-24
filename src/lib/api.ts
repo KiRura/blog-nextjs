@@ -35,7 +35,7 @@ export async function getPostListForRSS() {
 	const posts: MicroCMSListResponse<RssPost> = await cmsClient.getList({
 		endpoint: "blog",
 		queries: {
-			fields: "id,title,subtitle,coverImage,publishedAt,updatedAt",
+			fields: "id,title,subtitle,coverImage,publishedAt,updatedAt,createdAt",
 			orders: "-publishedAt",
 		},
 		customRequestInit: {
