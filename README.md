@@ -1,4 +1,6 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+## Moved to [kirura.f5.si/posts](https://www.kirura.f5.si/posts)
+
+## A statically generated blog example using Next.js, Markdown, and TypeScript
 
 This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
 
